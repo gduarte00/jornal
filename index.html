@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0c0c0c">
+<title>jornal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #0c0c0c;
+  --surface: #141414;
+  --border:  #1e1e1e;
+  --muted:   #444;
+  --soft:    #777;
+  --text:    #b8b8b8;
+  --bright:  #dedede;
+  --white:   #f0f0f0;
+  --sans:    'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --serif:   'EB Garamond', Georgia, 'Times New Roman', serif;
+}
+
+html {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--serif);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 56px 28px 80px;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── data ── */
+.date {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: var(--muted);
+  text-transform: lowercase;
+  padding-bottom: 48px;
+}
+
+/* ── rótulos de seção ── */
+.label {
+  display: block;
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  color: var(--muted);
+  text-transform: lowercase;
+  margin-bottom: 20px;
+}
+
+/* ── notícias ── */
+.news { margin-bottom: 52px; }
+
+.news-item {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.news-item:first-child { padding-top: 0; }
+
+.news-item a {
+  font-family: var(--sans);
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--bright);
+  text-transform: lowercase;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.news-item a:hover { color: var(--white); }
+
+.source {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* ── filmes ── */
+.films { margin-bottom: 52px; }
+
+.tab-bar {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.tab {
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: lowercase;
+  color: var(--muted);
+  padding-bottom: 10px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+.tab.active {
+  color: var(--bright);
+  border-bottom-color: var(--bright);
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+.cinema { margin-bottom: 40px; }
+
+.cinema-name {
+  font-family: var(--sans);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: lowercase;
+  margin-bottom: 16px;
+}
+
+.film-card {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+
+.film-card:last-child { border-bottom: none; }
+
+.poster {
+  width: 48px;
+  height: 72px;
+  object-fit: cover;
+  flex-shrink: 0;
+  display: block;
+}
+
+.poster-ph {
+  width: 48px;
+  height: 72px;
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.film-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 2px;
+}
+
+.film-title {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--bright);
+  line-height: 1.4;
+  text-transform: lowercase;
+}
+
+.film-times {
+  font-family: var(--serif);
+  font-size: 13px;
+  color: var(--soft);
+  font-style: italic;
+}
+
+.empty {
+  font-family: var(--serif);
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.empty a { color: var(--soft); }
+.empty a:hover { color: var(--text); }
+
+/* ── quote ── */
+.quote {
+  border-top: 1px solid var(--border);
+  padding-top: 40px;
+}
+
+.quote p {
+  font-family: var(--serif);
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--soft);
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+
+<p class="date">quinta-feira, 28 de maio de 2026</p>
+
+<span class="label">notícias</span>
+<section class="news">
+
+    <article class="news-item">
+      <a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxPUHdqYS1zT3lEeWFma1FBQUt6NV83OUdTR01QNTBrWFh2cUEtemZjS05vQUFvT2o5M0pVOXhING1yUHRRX3JWemxEWlhHdURMVFpqR1dnQ05sR19YRG9HT1JuSkhLWjlxMHJ2X2VNc2tfazVVcDRVeDBLUXVadW11TmlkQVNXb3g2TG4tbFVCS0ZvNnhYcFNoWjU0MVU3eEFtUDFJNllNUUhHYWJIM1VlZTNZb2daS1FieHFULXJZLXJLWTJBM0RlR2JLRlRNMDVla0hDVXFQdGotOXNGZTdnTGVXdFFtVEVENGY5R2JsT0t3WWp3ODBCVk9aVE1CUQ?oc=5" target="_blank" rel="noopener">por que porto alegre está cheia de gente com “cara” de corredor</a>
+      <span class="source">gzh</span>
+    </article>
+    <article class="news-item">
+      <a href="https://news.google.com/rss/articles/CBMi5gFBVV95cUxQZk1NUXZzZGZOX0QzcDN6b3pTUFlrNS00WEVHejNqRjJPWFlqWTlDWVlnai16OHVFZ0dkU3RXbkk2Ujl3LTlySklPYnhva2FuVTgwU0sxbllUUnRubVppeUZwS2RXcVJJd2FqTVJMbUoxMjZ5LVN0MTBMRmtkVjdCZ0gwTzJ1YmdlbXlmak5xZHdWUlBIdlVNQkJZb0l3M1pEWE4yZkVrS21QTjJKZWMwSkVERUI3bGwwNzZkcUVyV2h3d2p6YWhFb1ExT1pxVWxKSXZNVUZ1ci1rOFloRV9ZYTk4RUJpdw?oc=5" target="_blank" rel="noopener">porto alegre recebe a primeira estação de carregamento elétrico ultrarrápido do brasil</a>
+      <span class="source">correio do povo</span>
+    </article>
+</section>
+
+<span class="label">em cartaz</span>
+<section class="films">
+  <div class="tab-bar">
+    <button class="tab active" onclick="go(event,'hoje')">hoje</button>
+    <button class="tab"        onclick="go(event,'amanha')">amanhã</button>
+  </div>
+  <div id="hoje"   class="tab-panel active">
+    <div class="cinema">
+      <p class="cinema-name">cinemateca capitólio</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="cinema">
+      <p class="cinema-name">sala paulo amorim</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="cinema">
+      <p class="cinema-name">sala redenção</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div></div>
+  <div id="amanha" class="tab-panel">
+    <div class="cinema">
+      <p class="cinema-name">cinemateca capitólio</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="cinema">
+      <p class="cinema-name">sala paulo amorim</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div>
+    <div class="cinema">
+      <p class="cinema-name">sala redenção</p>
+      
+      <div class="film-card">
+        <div class="poster-ph"></div>
+        <div class="film-meta">
+          <span class="film-title">mostra os filmes em exibição</span>
+          <span class="film-times">—</span>
+        </div>
+      </div>
+    </div></div>
+</section>
+
+<div class="quote">
+  <p>&#8220;três coisas não podem ficar ocultas por muito tempo: o sol, a lua e a verdade.&#8221;</p>
+</div>
+
+<script>
+function go(e, id) {
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+  e.currentTarget.classList.add('active');
+  document.getElementById(id).classList.add('active');
+}
+</script>
+
+</body>
+</html>
